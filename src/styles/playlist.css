@@ -1,0 +1,136 @@
+.playList {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 1),
+    #030303
+  );
+  padding-bottom: 164px;
+}
+.album_mainBody_container {
+  width: 94vw;
+  min-height: 100vh;
+  left: 64px;
+  padding-top: 44px;
+  padding-left: 178px;
+}
+.playListContainer {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.playListThumbnail {
+  width: 264px;
+  height: 264px;
+}
+.playListThumbnail img {
+  width: 264px;
+  height: 264px;
+  border-radius: 6px;
+}
+.playListDiscription {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.playListName h1 {
+  color: #fff;
+}
+.playListType h4 {
+  color: #afafaf;
+  font-weight: 400;
+  line-height: 24px;
+}
+.playListMessage p {
+  color: #afafaf;
+}
+.playListSongs_container {
+  margin-top: 60px;
+}
+.playListSongs_songContainer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 4px;
+  margin-top: 4px;
+  border-bottom: 0.2px solid #282828;
+}
+.playListSongs_songContainer:hover .overlayForPlayingSongs {
+  display: flex;
+}
+.playList_imgtitle {
+  width: 370px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.playList_songArtist {
+  color: #afafaf;
+}
+.playListSongs_overlayForPlayingSongs {
+  position: absolute;
+  width: 90%;
+  height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+}
+.playListSongs_songContainer:hover .playListSongs_overlayForPlayingSongs {
+  display: flex;
+}
+
+@media (max-width: 460px) {
+  .album_mainBody_container {
+    width: auto;
+    padding: 0 10px;
+  }
+  .playList_songArtist,
+  .playListMessage {
+    display: none;
+  }
+  /* .playListSongs_songContainer:hover .playListSongs_overlayForPlayingSongs {
+    display: none;
+  } */
+  .playListSongs_overlayForPlayingSongs {
+    width: 80%;
+  }
+  .playListContainer {
+    gap: 10px;
+  }
+  .playListThumbnail {
+    width: 180px;
+    height: 180px;
+  }
+  .playListThumbnail img {
+    width: 180px;
+    height: 180px;
+  }
+  .playListDiscription {
+    width: 200px;
+  }
+  .playList_imgtitle {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 200px;
+  }
+  .playListName h1 {
+    font-size: 18px;
+  }
+  .playListType div {
+    height: 96px;
+    overflow-y: scroll;
+  }
+  .playListType div h4 {
+    font-size: 14px;
+  }
+  .playListType div::-webkit-scrollbar {
+    width: 2px;
+  }
+}

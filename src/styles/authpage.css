@@ -1,0 +1,62 @@
+.authpage {
+  min-height: 100vh;
+  background-image: url("https://lh3.googleusercontent.com/gP-rqVOBO3v93xd1fMYuOHc1iTM28UvQijoh8jhT5OcqC0KfZSrEQ4CXJvMc8W-pkJLUSaPWlDpVr0w=w1500-h844-l90-rj");
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  gap: 20px;
+}
+.authpage_overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 9;
+  background-image: linear-gradient(to bottom, #0000006e, #000);
+}
+.authpage .logo {
+  width: 40vh;
+  position: relative;
+  z-index: 9;
+}
+.authpage .logo img {
+  width: 100%;
+}
+.authpage_form {
+  margin-top: 40px;
+  width: 40vh;
+  padding: 40px 10px;
+  position: relative;
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background-color: #fdfdfd;
+  border-radius: 8px;
+  box-shadow: 0 0 15px blue;
+  border: 0.2px solid red;
+}
+.authpage_form_message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 9;
+}
+.authpage_message {
+  color: #fff;
+  text-align: center;
+}
+.authpage_btn {
+  font-size: 16px;
+  width: 120px;
+  padding: 8px 0;
+  background-color: #afafaf;
+  color: #fff;
+  border: 0 none;
+  border-radius: 25px;
+}

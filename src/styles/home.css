@@ -1,0 +1,243 @@
+.home {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 1),
+    #030303
+  );
+  padding-bottom: 164px;
+}
+.main_container {
+  position: relative;
+  top: 64px;
+}
+.mainBody_container {
+  left: 64px;
+  padding-top: 44px;
+  padding-left: 178px;
+}
+.moodsBtn_container {
+  display: flex;
+  gap: 10px;
+}
+.moodsBtn_container button {
+  height: 36px;
+  padding: 0 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #a7a7a73e;
+  border: 0 none transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.moodsBtn_container button:hover {
+  background-color: #c3c3c373;
+}
+.musicSelecter {
+  margin-top: 44px;
+  margin-bottom: 100px;
+}
+.headerForMusicDiv {
+  width: 78vw;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+.homeAvatar {
+  width: 54px !important;
+  height: 54px !important;
+}
+.musicLists_title h3 {
+  font-size: 14px;
+  color: #afafaf;
+}
+.musicLists_title h1 {
+  color: #fff;
+}
+.musicLists {
+  margin-top: 24px;
+  width: 78vw;
+  height: 280px;
+  overflow-x: hidden;
+}
+.musicLists::-webkit-scrollbar {
+  display: none;
+}
+.inner_MusicLists {
+  width: 2690px;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 30px;
+  row-gap: 10px;
+  transition: 1s ease-in-out;
+}
+.prevList_Btn {
+  width: 38px !important;
+  height: 38px !important;
+}
+.nextList_Btn {
+  width: 38px !important;
+  height: 38px !important;
+}
+.prev_next_Btn {
+  justify-self: flex-end;
+  align-self: flex-end;
+  display: flex;
+}
+.prev_next_Btn button {
+  width: 38px;
+  height: 38px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.songContainer {
+  position: relative;
+  width: 379px;
+  height: 50px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.overlayForPlayingSongs {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+}
+.songContainer:hover .overlayForPlayingSongs {
+  display: flex;
+}
+.songImgOverlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 4px;
+  background-color: #030303c8;
+  cursor: pointer;
+}
+.likeSongDiv {
+  width: 60px;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.songImg {
+  width: 50px;
+  height: 50px;
+}
+.songImg img {
+  width: 50px;
+  height: 100%;
+  border-radius: 4px;
+}
+.songText {
+  width: 220px;
+  white-space: nowrap;
+}
+.songTitle {
+  color: #fff;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.songArtist {
+  color: #afafaf;
+  font-weight: 400;
+  font-size: 14px;
+  display: flex;
+  margin-top: 6px;
+}
+.songArtist li {
+  margin-right: 20px;
+  list-style: none;
+}
+.albumLists {
+  margin-top: 24px;
+  width: 78vw;
+  height: 280px;
+  overflow-x: scroll;
+}
+.albumLists::-webkit-scrollbar {
+  display: none;
+}
+.inner_AlbumLists {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 20px;
+}
+.albumContainer {
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.albumImg {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  cursor: pointer;
+}
+
+.albumImg img {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+}
+.albumText {
+  width: 100%;
+}
+.albumText #albumTitle {
+  color: #fff;
+}
+.albumText #albumArtist {
+  color: #afafaf;
+  font-weight: 400;
+  font-size: 14px;
+  display: flex;
+  margin-top: 6px;
+}
+#albumArtist li {
+  margin-right: 20px;
+}
+#albumArtist li:first-child {
+  list-style: none;
+}
+.thirdDiv {
+  margin-bottom: 0;
+}
+@media (max-width: 460px) {
+  .main_container {
+    padding: 0 10px;
+  }
+  .mainBody_container {
+    padding-left: 0px;
+  }
+  .headerForMusicDiv {
+    width: auto;
+  }
+  .musicLists {
+    width: 100%;
+  }
+  .moodsBtn_container {
+    justify-content: center;
+  }
+  .albumLists {
+    width: auto;
+  }
+  .albumContainer {
+    width: 170px;
+  }
+  .overlayForPlayingSongs {
+    width: 96%;
+  }
+}

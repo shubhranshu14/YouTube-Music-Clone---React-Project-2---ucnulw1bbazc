@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+a {
+  text-decoration: none;
+  display: block;
+}
+
+.active {
+  background-color: #ffffff24;
+  border-radius: 8px;
+}
+.active2 {
+  background-color: #fff !important;
+  color: #282828 !important;
+}
+
+.drawer1 {
+  background-color: #030303;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 250px;
+  height: 100vh;
+  border-right: 0.2px solid #5f5f5f;
+  padding: 0 20px;
+  transition: transform 200ms;
+}
+.topDiv {
+  display: flex;
+  padding: 18px 0;
+  gap: 22px;
+}
+.listItems {
+  margin-top: 6px;
+}
+.item {
+  display: flex;
+  align-items: center;
+  padding: 14px 10px;
+  gap: 22px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.item:hover {
+  background-color: #282828;
+}
+.item h3 {
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+}
+.likedSongs_btn {
+  padding: 12px 10px;
+  gap: 22px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.likedSongs_btn:hover {
+  background-color: #282828;
+}
+.likedSongs_btn h3 {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+.likedSongs_btn h4 {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #afafaf;
+}
+.close {
+  cursor: pointer;
+}

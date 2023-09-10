@@ -1,0 +1,56 @@
+.offers_container {
+  min-height: 100vh;
+  padding: 80px 14px;
+  background-color: #030303;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.offers_container h3 {
+  color: #fff;
+  font-size: 16px;
+}
+.offers_container h4 {
+  color: #afafaf;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+.offers_ytm_logo_container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.offers_ytm_logo_container img {
+  width: 150px;
+}
+.pre-paid_plans,
+.sub-plan {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.offer_rates {
+  display: flex;
+  flex-direction: column;
+}
+.rates_price {
+  background-color: #242424;
+  padding: 16px;
+  border: 0.1px solid #3d3d3d;
+  color: #2faa37;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.offers_terms {
+  color: #afafaf;
+  font-size: 12.6px;
+  line-height: 18px;
+}
+@media (min-width: 459px) {
+  .offers_container {
+    padding: 80px 26vw;
+  }
+}
