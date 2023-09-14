@@ -37,7 +37,7 @@ function Explore(props) {
 
       //for album1
       const res4top50 = await fetch(
-        'https://academics.newtonschool.co/api/v1/music/song?filter={"featured":"Top 50 of this month"}',
+        'https://academics.newtonschool.co/api/v1/music/song?filter={"featured":"Top 50 of this month"}&limit=100',
         {
           headers: {
             projectId: "ucnulw1bbazc",
@@ -158,7 +158,24 @@ function Explore(props) {
                       onClick={() => handleAlbumClick(data)}
                     >
                       <div className="albumImg">
-                        <div className="likedOverlay"></div>
+                        <div className="likedOverlay">
+                          <div
+                            style={{
+                              width: "34px",
+                              height: "34px",
+                              borderRadius: "50%",
+                              backgroundColor: "#242424aa",
+                              position: "absolute",
+                              bottom: "20px",
+                              right: "20px",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                            }}
+                          >
+                            <PlayArrow />
+                          </div>
+                        </div>
                         <img src={data.image} />
                       </div>
                     </Link>

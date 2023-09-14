@@ -6,15 +6,15 @@ import "../styles/moreAlbum.css";
 import homeImg from "../img/library_background.jpg";
 import loadImg from "../img/Rolling-1s-203px.svg";
 import { Link } from "react-router-dom";
+import { PlayArrow } from "@mui/icons-material";
 
 function MoreAlbums(props) {
   const [moreAlbum, setMoreAlbum] = useState([]);
   const [loading, setLoading] = useState(true);
-
   const fetchMoreAlbum = async () => {
     try {
       const res = await fetch(
-        "https://academics.newtonschool.co/api/v1/music/album?page=2 ",
+        "https://academics.newtonschool.co/api/v1/music/album?page=4&limit=100",
         {
           headers: {
             projectId: "ucnulw1bbazc",
@@ -39,10 +39,21 @@ function MoreAlbums(props) {
     props.getAlbumSong(album.songs); // puts all the songs of album in songArr.
   };
 
+  // const element = document.getElementsByClassName("moreAlbum_wrapper");
+  // window.addEventListener("scroll", () => {
+  //   if (
+  //     element.length > 0 &&
+  //     window.innerHeight + window.scrollY >= element[0].offsetHeight
+  //   ) {
+  //     console.log("ready");
+  //   }
+  // });
+
   return (
     <div className="moreAlbum">
       <BackgroundImage imgUrl={homeImg} />
       <Navbar
+        userProfile={props.userProfile}
         scrollPosition={props.scrollPosition}
         handleLikedSong={props.handleLikedSong}
         playSong={props.playSong}
@@ -76,7 +87,24 @@ function MoreAlbums(props) {
                     onClick={() => handleAlbumClick(data)}
                   >
                     <div className="moreAlbumImg">
-                      <div className="likedOverlay"></div>
+                      <div className="likedOverlay">
+                        <div
+                          style={{
+                            width: "34px",
+                            height: "34px",
+                            borderRadius: "50%",
+                            backgroundColor: "#242424aa",
+                            position: "absolute",
+                            bottom: "20px",
+                            right: "20px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
+                        >
+                          <PlayArrow />
+                        </div>
+                      </div>
                       <img src={data.image} />
                     </div>
                   </Link>

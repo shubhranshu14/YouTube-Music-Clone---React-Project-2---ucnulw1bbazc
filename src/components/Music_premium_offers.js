@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import "../styles/offers.css";
 import Drawer1 from "./utils/Drawer1";
-import { Avatar } from "@mui/material";
+import { Avatar, Hidden, TextField } from "@mui/material";
 import logoImg from "../img/logo.svg";
+import loadImg from "../img/Rolling-1s-203px.svg";
+import gplayImg from "../img/gplay_yt_logo.webp";
+import cardImg from "../img/add_new_option_icon (1).webp";
+import paymentLogo from "../img/paymentLogo.webp";
 import ytm_logo from "../img/ytm_logo_offer.png";
 import {
   Menu,
@@ -10,10 +14,15 @@ import {
   Password,
   Logout,
   NavigateNext,
+  Close,
+  Add,
+  ArrowBack,
+  Opacity,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import UpiPayment from "./utils/UpiPayment";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -41,8 +50,65 @@ function Music_premium_offers(props) {
       window.location.reload(true);
     }, 2000);
   };
+  //for payment gateway
+  const [paymentOverlay, setPaymentOverlay] = useState(false);
+  const [isPaymentOpen, setIsPaymentOpen] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState(false);
+  const [rateOfPack, setRateOfPack] = useState(null);
+  const [timeOfPack, setTimeOfPack] = useState(null);
+  const [payUpi, setPayUpi] = useState(false);
+  const [emptyField, setEmptyField] = useState(false);
+  const [valueOfUpi, setValueOfUpi] = useState("");
+  const handlePayment = (rate, time) => {
+    setPaymentOverlay(true);
+    document.body.classList.add("overflowHidden");
+    setRateOfPack(rate);
+    setTimeOfPack(time);
+    setTimeout(() => {
+      setIsPaymentOpen(true);
+    }, 2000);
+  };
+
+  const handlePaymentClose = () => {
+    setPaymentOverlay(false);
+    document.body.classList.remove("overflowHidden");
+    setIsPaymentOpen(false);
+  };
+  const handleAddPaymentMethod = () => {
+    setIsPaymentOpen(false);
+    setPaymentMethod(true);
+  };
+  const handleBackToPayment = () => {
+    setIsPaymentOpen(true);
+    setPaymentMethod(false);
+  };
+  const handleAddUpi = () => {
+    setPaymentMethod(false);
+    setPayUpi(true);
+  };
+  const handleBackToAddMethod = () => {
+    setPayUpi(false);
+    setPaymentMethod(true);
+    setValueOfUpi("");
+    setEmptyField(false);
+  };
+  const handlePurchase = () => {
+    if (valueOfUpi === "") {
+      return setEmptyField(true);
+    }
+    document.body.classList.remove("overflowHidden");
+    setEmptyField(false);
+    setIsPaymentOpen(false);
+    setPaymentMethod(false);
+    setPayUpi(false);
+    setValueOfUpi("");
+    setTimeout(() => {
+      setPaymentOverlay(false);
+      handleClick();
+    }, 1000);
+  };
   //for snackbar of payment msg
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClick = () => {
     setOpen(true);
@@ -59,6 +125,145 @@ function Music_premium_offers(props) {
   return (
     <div id="mainDiv">
       <div id="overlay"></div>
+      {paymentOverlay ? (
+        <div className="payment_overlay">
+          {isPaymentOpen ? (
+            <div className="payment_box">
+              <div className="pbox_line1">
+                <Close
+                  style={{ color: "#282828", cursor: "pointer" }}
+                  onClick={handlePaymentClose}
+                />
+                <h2 style={{ fontSize: "18px", fontWeight: 600 }}>
+                  Complete your purchase
+                </h2>
+              </div>
+              <div className="pbox_line2">
+                <div className="pbox_logo">
+                  <img src={paymentLogo} alt="logo" />
+                  <div>
+                    <h3>Music Premium</h3>
+                    <h4>Membership</h4>
+                  </div>
+                </div>
+                <div className="price">₹{rateOfPack}.00</div>
+              </div>
+              <div className="pbox_line2 line3">
+                <div className="pbox_logo">
+                  <div>
+                    <h3>{timeOfPack}-Month Plan</h3>
+                    {/* <h4>Access ends: After {timeOfPack} month</h4> */}
+                  </div>
+                </div>
+                <div className="price">₹{rateOfPack}.00</div>
+              </div>
+              <div className="payment_method pbox_line2">
+                <h3>Add payment method</h3>
+                <Add
+                  style={{ color: "#808080", cursor: "pointer" }}
+                  onClick={handleAddPaymentMethod}
+                />
+              </div>
+              <h4>
+                By continuing, you verify that you are at least 18 years old and
+                agree to these terms.
+              </h4>
+              <div className="pbox_subline">
+                <div className="pbox_line2">
+                  <h4>Subtotal</h4>
+                  <h4>₹{(rateOfPack - 0.15 * rateOfPack).toFixed(2)}</h4>
+                </div>
+                <div className="pbox_line2">
+                  <h4>Tax</h4>
+                  <h4>₹{(0.15 * rateOfPack).toFixed(2)}</h4>
+                </div>
+              </div>
+              <div className="pbox_line2">
+                <h3>Total today</h3>
+                <h3>₹{rateOfPack}.00</h3>
+              </div>
+              <button className="payBtn" onClick={handleAddPaymentMethod}>
+                BUY
+              </button>
+            </div>
+          ) : !paymentMethod && !payUpi ? (
+            <div
+              style={{
+                color: "white",
+                position: "fixed",
+                inset: 0,
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <img
+                style={{ position: "fixed", top: "40%", left: "46%" }}
+                src={loadImg}
+                alt="loading..."
+              />
+            </div>
+          ) : null}
+          {paymentMethod ? (
+            <div className="payment_box">
+              <div className="pbox_line1">
+                <ArrowBack
+                  style={{ color: "#282828", cursor: "pointer" }}
+                  onClick={handleBackToPayment}
+                />
+                <h2 style={{ fontSize: "18px", fontWeight: 600 }}>
+                  Change payment method
+                </h2>
+              </div>
+              <div
+                className="pbox_line1"
+                style={{
+                  borderBottom: "0.2px solid #d0d0d0",
+                  paddingBottom: "14px",
+                }}
+              >
+                <img
+                  className="cardimg"
+                  style={{ filter: "opacity(40%)" }}
+                  src={gplayImg}
+                  alt="add card"
+                />
+                <div>
+                  <h3 style={{ color: "#afafaf", fontWeight: 400 }}>
+                    Google Play balance: ₹0.00
+                  </h3>
+                  <h4
+                    style={{
+                      color: "#afafaf",
+                      fontWeight: 300,
+                      marginTop: "4px",
+                    }}
+                  >
+                    Insufficient funds
+                  </h4>
+                </div>
+              </div>
+              <div
+                className="pbox_line1"
+                style={{ cursor: "pointer" }}
+                onClick={handleAddUpi}
+              >
+                <img className="cardimg" src={cardImg} alt="add card" />
+                <h3>Pay with UPI</h3>
+              </div>
+            </div>
+          ) : null}
+          {payUpi ? (
+            <UpiPayment
+              valueOfUpi={valueOfUpi}
+              setValueOfUpi={setValueOfUpi}
+              emptyField={emptyField}
+              handlePurchase={handlePurchase}
+              handleBackToAddMethod={handleBackToAddMethod}
+            />
+          ) : null}
+        </div>
+      ) : null}
+
       <nav className="nav4upgrade">
         <div className="nav1">
           <Menu className="menu" onClick={handleDrawer} />
@@ -146,7 +351,10 @@ function Music_premium_offers(props) {
             </h4>
           </div>
           <div className="offer_rates">
-            <div className="rates_price" onClick={handleClick}>
+            <div
+              className="rates_price"
+              onClick={() => handlePayment(990.0, 12)}
+            >
               <div>
                 <div
                   style={{ display: "flex", alignItems: "center", gap: "5px" }}
@@ -168,14 +376,14 @@ function Music_premium_offers(props) {
               </div>
               <NavigateNext />
             </div>
-            <div className="rates_price" onClick={handleClick}>
+            <div className="rates_price" onClick={() => handlePayment(309, 3)}>
               <div>
                 <h3>3-month</h3>
                 <h4>₹309.00</h4>
               </div>
               <NavigateNext />
             </div>
-            <div className="rates_price" onClick={handleClick}>
+            <div className="rates_price" onClick={() => handlePayment(109, 1)}>
               <div>
                 <h3>1-month</h3>
                 <h4>₹109.00</h4>
@@ -184,7 +392,7 @@ function Music_premium_offers(props) {
             </div>
           </div>
         </div>
-        <div className="sub-plan">
+        {/* <div className="sub-plan">
           <div className="offer_title">
             <h3>Subscription plans</h3>
             <h4>
@@ -202,7 +410,7 @@ function Music_premium_offers(props) {
               <NavigateNext />
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="offers_terms">
           <p>
             Restrictions apply to certain features and vary by device,

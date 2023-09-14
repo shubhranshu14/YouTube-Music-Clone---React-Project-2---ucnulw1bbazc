@@ -284,7 +284,24 @@ function Home(props) {
                       onClick={() => handleAlbumClick(data)}
                     >
                       <div className="albumImg">
-                        <div className="likedOverlay"></div>
+                        <div className="likedOverlay">
+                          <div
+                            style={{
+                              width: "34px",
+                              height: "34px",
+                              borderRadius: "50%",
+                              backgroundColor: "#242424aa",
+                              position: "absolute",
+                              bottom: "20px",
+                              right: "20px",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                            }}
+                          >
+                            <PlayArrow />
+                          </div>
+                        </div>
                         <img src={data.image} />
                       </div>
                     </Link>
@@ -314,7 +331,24 @@ function Home(props) {
                       onClick={() => handleAlbumClick(data, index)}
                     >
                       <div className="albumImg">
-                        <div className="likedOverlay"></div>
+                        <div className="likedOverlay">
+                          <div
+                            style={{
+                              width: "34px",
+                              height: "34px",
+                              borderRadius: "50%",
+                              backgroundColor: "#242424aa",
+                              position: "absolute",
+                              bottom: "20px",
+                              right: "20px",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                            }}
+                          >
+                            <PlayArrow />
+                          </div>
+                        </div>
                         <img src={data.image} />
                       </div>
                     </Link>

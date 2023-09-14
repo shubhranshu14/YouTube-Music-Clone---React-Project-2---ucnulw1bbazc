@@ -37,8 +37,17 @@ function Navbar(props) {
   const [searchMessage, setSearchMessage] = useState("");
   const searchSong = async (songName) => {
     try {
+      const words = songName.split(" ");
+
+      // Capitalize the first letter of each word
+      const capitalizedWords = words.map(
+        (word) => word.charAt(0).toUpperCase() + word.slice(1)
+      );
+
+      // Join the capitalized words back together
+      const capitalizedSongName = capitalizedWords.join(" ");
       const res = await fetch(
-        `https://academics.newtonschool.co/api/v1/music/song?filter={"title":"${songName}"}`,
+        `https://academics.newtonschool.co/api/v1/music/song?filter={"title":"${capitalizedSongName}"}`,
         {
           headers: {
             projectId: "ucnulw1bbazc",

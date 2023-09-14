@@ -1,3 +1,78 @@
+.overflowHidden {
+  overflow-y: hidden;
+}
+.payment_overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+
+  background-color: #000000d4;
+  z-index: 100;
+}
+.payment_box {
+  width: 600px;
+  height: fit-content;
+  padding: 24px;
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  background-color: #fff;
+}
+.payment_box h3 {
+  font-size: 14px;
+}
+.payment_box h4 {
+  color: #606060;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.pbox_line1 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+}
+.pbox_line2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pbox_logo {
+  display: flex;
+  gap: 16px;
+}
+.pbox_logo img {
+  width: 50px;
+  height: 50px;
+}
+.cardimg {
+  width: 58px;
+  height: 35px;
+}
+.price {
+  font-size: 14px;
+  font-weight: 600;
+}
+.line3 {
+  padding-bottom: 5px;
+  border-bottom: 0.2px solid #d0d0d0;
+}
+.payBtn {
+  height: 40px;
+  color: white;
+  font-weight: 600;
+  background-color: #065fd4ff;
+  border: 0 none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 .offers_container {
   min-height: 100vh;
   padding: 80px 14px;
@@ -49,6 +124,7 @@
   font-size: 12.6px;
   line-height: 18px;
 }
+
 @media (min-width: 459px) {
   .offers_container {
     padding: 80px 26vw;

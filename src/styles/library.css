@@ -15,6 +15,7 @@
   padding-left: 178px;
 }
 .likedOverlay {
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -22,6 +23,7 @@
   bottom: 0;
 }
 .albumImg:hover .likedOverlay {
+  display: block;
   background-image: linear-gradient(
     rgba(0, 0, 0, 0.502),
     rgba(0, 0, 0, 0),

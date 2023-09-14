@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.5d643c59.css",
-    "main.js": "/static/js/main.24b5fb6d.js",
+    "main.css": "/static/css/main.85b5ae15.css",
+    "main.js": "/static/js/main.3ee792f5.js",
     "static/media/ytr_story3.jpg": "/static/media/ytr_story3.28f8e88d615d74ab63fc.jpg",
     "static/media/ytr_story1.jpg": "/static/media/ytr_story1.66810fee0b3c3e3ad4fe.jpg",
     "static/media/ytr_story2.jpg": "/static/media/ytr_story2.4141f300508797f20f71.jpg",
@@ -13,14 +13,17 @@
     "static/media/sadImg.avif": "/static/media/sadImg.017ad41549b590cfd897.avif",
     "static/media/home_background.jpg": "/static/media/home_background.6f7d00385f2b998ff17f.jpg",
     "static/media/library_background.jpg": "/static/media/library_background.7c536a0bae413f459f03.jpg",
+    "static/media/paymentLogo.webp": "/static/media/paymentLogo.754cf1b355f28bcca424.webp",
     "static/media/logo.svg": "/static/media/logo.e275464692d2505851b3206632cde6f2.svg",
+    "static/media/gplay_yt_logo.webp": "/static/media/gplay_yt_logo.8c8da079d681591421b8.webp",
     "static/media/Rolling-1s-203px.svg": "/static/media/Rolling-1s-203px.a04911779e1a870593e7aa19f2c577a2.svg",
+    "static/media/add_new_option_icon (1).webp": "/static/media/add_new_option_icon (1).6462c7222630aea8a961.webp",
     "index.html": "/index.html",
-    "main.5d643c59.css.map": "/static/css/main.5d643c59.css.map",
-    "main.24b5fb6d.js.map": "/static/js/main.24b5fb6d.js.map"
+    "main.85b5ae15.css.map": "/static/css/main.85b5ae15.css.map",
+    "main.3ee792f5.js.map": "/static/js/main.3ee792f5.js.map"
   },
   "entrypoints": [
-    "static/css/main.5d643c59.css",
-    "static/js/main.24b5fb6d.js"
+    "static/css/main.85b5ae15.css",
+    "static/js/main.3ee792f5.js"
   ]
 }
