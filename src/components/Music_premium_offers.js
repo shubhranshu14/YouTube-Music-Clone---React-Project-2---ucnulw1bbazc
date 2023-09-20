@@ -23,6 +23,7 @@ import { useNavigate } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import UpiPayment from "./utils/UpiPayment";
+import SimpleSnackbar2 from "./utils/SimpleSnackbar2";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -59,14 +60,37 @@ function Music_premium_offers(props) {
   const [payUpi, setPayUpi] = useState(false);
   const [emptyField, setEmptyField] = useState(false);
   const [valueOfUpi, setValueOfUpi] = useState("");
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+  const [messageForPack, setMessageForPack] = useState("");
   const handlePayment = (rate, time) => {
-    setPaymentOverlay(true);
-    document.body.classList.add("overflowHidden");
-    setRateOfPack(rate);
-    setTimeOfPack(time);
-    setTimeout(() => {
-      setIsPaymentOpen(true);
-    }, 2000);
+    const boughtPack = localStorage.getItem("PackSub");
+    if (boughtPack) {
+      // setIsSnackbarOpen(true);
+      const subRate = JSON.parse(boughtPack);
+      if (subRate === rate) {
+        setIsSnackbarOpen(true);
+        setMessageForPack("Already Subscribed!");
+      } else if (subRate > rate) {
+        setIsSnackbarOpen(true);
+        setMessageForPack("Already Subscribed to a higher Plan!");
+      } else {
+        setPaymentOverlay(true);
+        document.body.classList.add("overflowHidden");
+        setRateOfPack(rate);
+        setTimeOfPack(time);
+        setTimeout(() => {
+          setIsPaymentOpen(true);
+        }, 2000);
+      }
+    } else {
+      setPaymentOverlay(true);
+      document.body.classList.add("overflowHidden");
+      setRateOfPack(rate);
+      setTimeOfPack(time);
+      setTimeout(() => {
+        setIsPaymentOpen(true);
+      }, 2000);
+    }
   };
 
   const handlePaymentClose = () => {
@@ -96,6 +120,7 @@ function Music_premium_offers(props) {
     if (valueOfUpi === "") {
       return setEmptyField(true);
     }
+    localStorage.setItem("PackSub", JSON.stringify(rateOfPack));
     document.body.classList.remove("overflowHidden");
     setEmptyField(false);
     setIsPaymentOpen(false);
@@ -471,6 +496,11 @@ function Music_premium_offers(props) {
             Payment Successful!
           </Alert>
         </Snackbar>
+        <SimpleSnackbar2
+          whenLiked={isSnackbarOpen}
+          setIsSnackbarOpen={setIsSnackbarOpen}
+          message={messageForPack}
+        />
       </div>
     </div>
   );

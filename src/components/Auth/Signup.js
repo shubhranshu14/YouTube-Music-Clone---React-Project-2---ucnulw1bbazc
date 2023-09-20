@@ -41,7 +41,7 @@ function Signup(props) {
       props.setTokenNo(restojson.token);
       setSuccess(restojson.status);
       setTimeout(() => {
-        navigate("/login");
+        navigate("/");
       }, 1000);
     } catch (err) {
       console.error(err);
@@ -114,9 +114,9 @@ function Signup(props) {
           <button className="authpage_btn" onClick={handleSignup}>
             Sign up
           </button>
-          <p style={{ fontSize: "12px", display: "flex" }}>
+          <p style={{ fontSize: "16px", display: "flex" }}>
             Have an account?
-            <Link to="/login">
+            <Link to="/">
               <span>Log in</span>
             </Link>
             .

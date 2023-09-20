@@ -121,9 +121,9 @@ function Login() {
           <button className="authpage_btn" onClick={handleLogin}>
             Log in
           </button>
-          <p style={{ fontSize: "12px", display: "flex" }}>
+          <p style={{ fontSize: "15px", display: "flex" }}>
             Don't have an account?
-            <Link to="/">
+            <Link to="/signup">
               <span>Sign up</span>
             </Link>
             .

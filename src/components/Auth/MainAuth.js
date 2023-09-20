@@ -10,8 +10,8 @@ function MainAuth() {
     <BrowserRouter>
       <Routes>
         <Route path="*" element={<Page404 />} />
-        <Route path="/" element={<Signup setTokenNo={setTokenNo} />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup setTokenNo={setTokenNo} />} />
+        <Route path="/" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );

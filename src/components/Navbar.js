@@ -83,7 +83,7 @@ function Navbar(props) {
   const handleLogout = () => {
     localStorage.clear();
     setTimeout(() => {
-      navigate("/login");
+      navigate("/");
       window.location.reload(true);
     }, 2000);
   };
