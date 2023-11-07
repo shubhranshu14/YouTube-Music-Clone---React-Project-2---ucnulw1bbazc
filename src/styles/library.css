@@ -4,12 +4,23 @@
     rgba(0, 0, 0, 0.5),
     rgba(0, 0, 0, 1),
     rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 1),
     #030303
   );
   padding-bottom: 164px;
 }
 .playList_mainBody_container {
-  height: 100vh;
+  min-height: 100vh;
+  min-width: 100%;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
   left: 64px;
   padding-top: 44px;
   padding-left: 178px;
@@ -30,6 +41,7 @@
     rgba(0, 0, 0, 0)
   );
 }
+
 @media (max-width: 460px) {
   .playList_mainBody_container {
     padding-left: 40px;

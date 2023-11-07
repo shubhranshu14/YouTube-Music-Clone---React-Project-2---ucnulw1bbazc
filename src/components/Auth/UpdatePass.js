@@ -114,10 +114,10 @@ function UpdatePass(props) {
           <button className="authpage_btn" onClick={handleUpdate}>
             Update
           </button>
-          <p style={{ fontSize: "12px", display: "flex" }}>
+          <p style={{ fontSize: "13px", display: "flex" }}>
             Go back to
             <Link to="/">
-              <span> Home</span>
+              <span className="hoverid"> Home</span>
             </Link>
             .
           </p>

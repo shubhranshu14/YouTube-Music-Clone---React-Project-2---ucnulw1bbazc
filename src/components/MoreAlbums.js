@@ -6,7 +6,12 @@ import "../styles/moreAlbum.css";
 import homeImg from "../img/library_background.jpg";
 import loadImg from "../img/Rolling-1s-203px.svg";
 import { Link } from "react-router-dom";
-import { PlayArrow } from "@mui/icons-material";
+import {
+  LibraryAddCheck,
+  LibraryAddOutlined,
+  MoreVert,
+  PlayArrow,
+} from "@mui/icons-material";
 
 function MoreAlbums(props) {
   const [moreAlbum, setMoreAlbum] = useState([]);
@@ -39,15 +44,25 @@ function MoreAlbums(props) {
     props.getAlbumSong(album.songs); // puts all the songs of album in songArr.
   };
 
-  // const element = document.getElementsByClassName("moreAlbum_wrapper");
-  // window.addEventListener("scroll", () => {
-  //   if (
-  //     element.length > 0 &&
-  //     window.innerHeight + window.scrollY >= element[0].offsetHeight
-  //   ) {
-  //     console.log("ready");
-  //   }
-  // });
+  //for moreVert
+
+  const [isMoreVisible, setIsMoreVisible] = useState(false);
+  const [isAlbumpresent, setIsAlbumpresent] = useState(false);
+  const [intIndex, setIntIndex] = useState();
+  const handleMoreVert = (event, ind, data) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setIntIndex(ind);
+    setIsMoreVisible(!isMoreVisible);
+    const isAlbumAdded = props.libraryArr.some(
+      (album) => album._id === data._id
+    );
+    if (isAlbumAdded) {
+      setIsAlbumpresent(true);
+      return;
+    }
+    setIsAlbumpresent(false);
+  };
 
   return (
     <div className="moreAlbum">
@@ -93,6 +108,24 @@ function MoreAlbums(props) {
                             width: "34px",
                             height: "34px",
                             borderRadius: "50%",
+                            backgroundColor: "#2424243a",
+                            position: "absolute",
+                            top: "10px",
+                            right: "10px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            zIndex: "99",
+                          }}
+                          onClick={(e) => handleMoreVert(e, index, data)}
+                        >
+                          <MoreVert />
+                        </div>
+                        <div
+                          style={{
+                            width: "34px",
+                            height: "34px",
+                            borderRadius: "50%",
                             backgroundColor: "#242424aa",
                             position: "absolute",
                             bottom: "20px",
@@ -106,6 +139,28 @@ function MoreAlbums(props) {
                         </div>
                       </div>
                       <img src={data.image} />
+                      {isMoreVisible && index === intIndex ? (
+                        <div
+                          className="addtolib"
+                          style={{ left: index === 0 ? "140px" : "-50px" }}
+                          onClick={(e) => {
+                            props.handleAddtolib(e, data);
+                            setIsMoreVisible(false);
+                          }}
+                        >
+                          {!isAlbumpresent ? (
+                            <>
+                              <LibraryAddOutlined />
+                              <h4>Save album to library</h4>
+                            </>
+                          ) : (
+                            <>
+                              <LibraryAddCheck />
+                              <h4>Remove album from library</h4>
+                            </>
+                          )}
+                        </div>
+                      ) : null}
                     </div>
                   </Link>
                   <div className="albumText">

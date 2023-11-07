@@ -10,7 +10,7 @@ import "../styles/music_premium.css";
 import { Menu, Cast, Password, Logout } from "@mui/icons-material";
 import CustomizedDialogs from "./utils/CustomizedDialogs";
 import { useNavigate } from "react-router-dom";
-
+import LoadingBar from "react-top-loading-bar";
 function Music_premium(props) {
   //for userProfile dropdown
   const [isModal2Open, setIsModal2Open] = useState(false);
@@ -18,31 +18,48 @@ function Music_premium(props) {
   //for drawer
   const [drawerOpen, setDrawerOpen] = useState(false);
   const handleDrawer = () => {
+    if (isModal2Open) setIsModal2Open(false);
     setDrawerOpen(!drawerOpen);
     // document.body.classList.toggle("overflowHidden");
     document.getElementById("overlay").classList.toggle("overlay");
   };
 
+  //for loading progrss bar
+  const [progress, setProgress] = useState(0);
   //for log out
 
   const navigate = useNavigate();
   const handleLogout = () => {
+    setProgress(progress + 40);
     localStorage.clear();
     setTimeout(() => {
-      navigate("/login");
+      setProgress(100);
+    }, [1000]);
+    setTimeout(() => {
+      navigate("/");
       window.location.reload(true);
     }, 2000);
   };
   //for update password
-  const handleUpdatePass = () => {};
+  // const handleUpdatePass = () => {};
 
   return (
     <div id="mainDiv">
+      <LoadingBar
+        color="#f11946"
+        progress={progress}
+        onLoaderFinished={() => setProgress(0)}
+      />
       <div id="overlay"></div>
       <nav className="nav4upgrade">
         <div className="nav1">
           <Menu className="menu" onClick={handleDrawer} />
-          <img src={logoImg} alt="logo" onClick={() => navigate("/")} />
+          <img
+            src={logoImg}
+            alt="logo"
+            onClick={() => navigate("/")}
+            style={{ cursor: "pointer" }}
+          />
         </div>
         <div className="nav2">
           <div className="cast" style={{ position: "relative" }}>

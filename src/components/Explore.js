@@ -6,6 +6,8 @@ import "../styles/explore.css";
 import homeImg from "../img/home_background.jpg";
 import {
   ExpandCircleDownOutlined,
+  LibraryAddCheck,
+  LibraryAddOutlined,
   MoreVert,
   NavigateBefore,
   NavigateNext,
@@ -102,15 +104,36 @@ function Explore(props) {
     props.getAlbumSong(album.songs); // puts all the songs of album in songArr.
   };
 
-  //for snackbar when a song is liked
-  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
-  const openSnackbar = () => {
-    setIsSnackbarOpen(true);
-  };
+  // //for snackbar when a song is liked
+  // const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+  // const openSnackbar = () => {
+  //   setIsSnackbarOpen(true);
+  // };
   const navigate = useNavigate();
   const handleMoreBtn = () => {
     navigate("/morealbums");
   };
+
+  //for moreVert
+
+  const [isMoreVisible, setIsMoreVisible] = useState(false);
+  const [isAlbumpresent, setIsAlbumpresent] = useState(false);
+  const [intIndex, setIntIndex] = useState();
+  const handleMoreVert = (event, ind, data) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setIntIndex(ind);
+    setIsMoreVisible(!isMoreVisible);
+    const isAlbumAdded = props.libraryArr.some(
+      (album) => album._id === data._id
+    );
+    if (isAlbumAdded) {
+      setIsAlbumpresent(true);
+      return;
+    }
+    setIsAlbumpresent(false);
+  };
+
   return (
     <div className="explore">
       <BackgroundImage imgUrl={homeImg} />
@@ -164,6 +187,24 @@ function Explore(props) {
                               width: "34px",
                               height: "34px",
                               borderRadius: "50%",
+                              backgroundColor: "#2424243a",
+                              position: "absolute",
+                              top: "10px",
+                              right: "10px",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              zIndex: "99",
+                            }}
+                            onClick={(e) => handleMoreVert(e, index, data)}
+                          >
+                            <MoreVert />
+                          </div>
+                          <div
+                            style={{
+                              width: "34px",
+                              height: "34px",
+                              borderRadius: "50%",
                               backgroundColor: "#242424aa",
                               position: "absolute",
                               bottom: "20px",
@@ -177,6 +218,28 @@ function Explore(props) {
                           </div>
                         </div>
                         <img src={data.image} />
+                        {isMoreVisible && index === intIndex ? (
+                          <div
+                            className="addtolib"
+                            style={{ left: index === 0 ? "140px" : "-50px" }}
+                            onClick={(e) => {
+                              props.handleAddtolib(e, data);
+                              setIsMoreVisible(false);
+                            }}
+                          >
+                            {!isAlbumpresent ? (
+                              <>
+                                <LibraryAddOutlined />
+                                <h4>Save album to library</h4>
+                              </>
+                            ) : (
+                              <>
+                                <LibraryAddCheck />
+                                <h4>Remove album from library</h4>
+                              </>
+                            )}
+                          </div>
+                        ) : null}
                       </div>
                     </Link>
                     <div className="albumText">
@@ -256,7 +319,6 @@ function Explore(props) {
                           style={{ cursor: "pointer" }}
                           onClick={() => {
                             props.handleLikedSong(data);
-                            openSnackbar();
                           }}
                         />
                         {/* <MoreVert style={{ cursor: "pointer" }} /> */}
@@ -351,7 +413,6 @@ function Explore(props) {
                           style={{ cursor: "pointer" }}
                           onClick={() => {
                             props.handleLikedSong(data);
-                            openSnackbar();
                           }}
                         />
                         {/* <MoreVert style={{ cursor: "pointer" }} /> */}
@@ -372,11 +433,11 @@ function Explore(props) {
             </div>
           </div>
         </div>
-        <SimpleSnackbar
+        {/* <SimpleSnackbar
           whenLiked={isSnackbarOpen}
           setIsSnackbarOpen={setIsSnackbarOpen}
           message={"Saved to your likes"}
-        />
+        /> */}
       </div>
     </div>
   );

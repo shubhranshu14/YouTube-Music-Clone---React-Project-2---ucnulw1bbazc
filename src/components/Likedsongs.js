@@ -14,16 +14,22 @@ import {
 import SimpleSnackbar from "./utils/SimpleSnackbar";
 
 function Likedsongs(props) {
-  const [dislikeSong, setDislikeSong] = useState(props.likedSongs);
+  // const [dislikeSong, setDislikeSong] = useState(() => {
+  //   const listofLikedSongs = localStorage.getItem("arrLikedSong");
+  //   if (listofLikedSongs) {
+  //     return JSON.parse(listofLikedSongs);
+  //   }
+  //   return null;
+  // });
   const handleDislike = (data) => {
-    const updatedLikedSong = dislikeSong.filter(
+    const updatedLikedSong = /*dislikeSong*/ props.likedSongs.filter(
       (song) => song._id !== data._id
     );
-    setDislikeSong(updatedLikedSong);
+    props.setLikedSongs(updatedLikedSong);
   };
   useEffect(() => {
-    localStorage.setItem("arrLikedSong", JSON.stringify(dislikeSong));
-  }, [dislikeSong]);
+    localStorage.setItem("arrLikedSong", JSON.stringify(props.likedSongs));
+  }, [props.likedSongs]);
   //for snackbar when a song is liked
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const openSnackbar = () => {
@@ -50,7 +56,7 @@ function Likedsongs(props) {
               </div>
               <div className="playListType">
                 <h4>Auto playlist</h4>
-                <h4>{dislikeSong.length} Songs</h4>
+                <h4>{props.likedSongs.length} Songs</h4>
               </div>
               <div className="playListMessage">
                 <p>
@@ -61,7 +67,7 @@ function Likedsongs(props) {
             </div>
           </div>
           <div className="playListSongs_container">
-            {dislikeSong.map((data, index) => (
+            {props.likedSongs.map((data, index) => (
               <div className="playListSongs_songContainer" key={index}>
                 <div className="playListSongs_overlayForPlayingSongs">
                   <div className="songImgOverlay">

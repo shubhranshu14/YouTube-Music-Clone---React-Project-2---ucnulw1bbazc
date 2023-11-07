@@ -100,6 +100,11 @@ nav {
   font-size: 14px;
   font-weight: 300;
   cursor: pointer;
+  border-radius: 4px;
+  padding-left: 10px;
+}
+.popup_btn:hover {
+  background-color: #9c9c9c51;
 }
 .search4Mobile {
   display: none;
@@ -131,7 +136,7 @@ nav {
 .cast:hover div {
   display: block !important;
 }
-@media (max-width: 460px) {
+@media (max-width: 900px) {
   .flexDiv_4_search {
     display: none;
   }
@@ -139,7 +144,7 @@ nav {
     display: block;
   }
 }
-@media (min-width: 461px) {
+@media (min-width: 901px) {
   .search_container_4Mobile {
     display: none;
   }

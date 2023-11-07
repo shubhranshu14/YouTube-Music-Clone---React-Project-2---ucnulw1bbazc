@@ -34,11 +34,11 @@ function Album(props) {
     getAlbumData();
   }, []);
 
-  //for snackbar when a song is liked
-  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
-  const openSnackbar = () => {
-    setIsSnackbarOpen(true);
-  };
+  // //for snackbar when a song is liked
+  // const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+  // const openSnackbar = () => {
+  //   setIsSnackbarOpen(true);
+  // };
   return (
     <div className="playList">
       <BackgroundImage imgUrl={homeImg} />
@@ -108,7 +108,6 @@ function Album(props) {
                     style={{ cursor: "pointer" }}
                     onClick={() => {
                       props.handleLikedSong(song);
-                      openSnackbar();
                     }}
                   />
                   {/* <MoreVert style={{ cursor: "pointer" }} /> */}
@@ -116,11 +115,11 @@ function Album(props) {
               </div>
             ))}
           </div>
-          <SimpleSnackbar
+          {/* <SimpleSnackbar
             whenLiked={isSnackbarOpen}
             setIsSnackbarOpen={setIsSnackbarOpen}
             message={"Saved to your likes"}
-          />
+          /> */}
         </div>
       </div>
     </div>

@@ -19,7 +19,7 @@ function UpiPayment(props) {
         <div style={{ width: "100%" }}>
           <TextField
             id="standard-basic"
-            label="UPI ID"
+            label={props.label4upi}
             variant="standard"
             value={props.valueOfUpi}
             onChange={(e) => props.setValueOfUpi(e.target.value)}

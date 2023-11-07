@@ -24,6 +24,7 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import UpiPayment from "./utils/UpiPayment";
 import SimpleSnackbar2 from "./utils/SimpleSnackbar2";
+import LoadingBar from "react-top-loading-bar";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -35,19 +36,26 @@ function Music_premium_offers(props) {
 
   //for drawer
   const [drawerOpen, setDrawerOpen] = useState(false);
+
   const handleDrawer = () => {
+    if (isModal2Open) setIsModal2Open(false);
     setDrawerOpen(!drawerOpen);
     // document.body.classList.toggle("overflowHidden");
     document.getElementById("overlay").classList.toggle("overlay");
   };
-
+  //for loading progress bar
+  const [progress, setProgress] = useState(0);
   //for log out
 
   const navigate = useNavigate();
   const handleLogout = () => {
+    setProgress(progress + 40);
+    setTimeout(() => {
+      setProgress(100);
+    }, [1000]);
     localStorage.clear();
     setTimeout(() => {
-      navigate("/login");
+      navigate("/");
       window.location.reload(true);
     }, 2000);
   };
@@ -114,14 +122,21 @@ function Music_premium_offers(props) {
     setPayUpi(false);
     setPaymentMethod(true);
     setValueOfUpi("");
+    setLabel4upi("UPI ID");
     setEmptyField(false);
   };
+  const [label4upi, setLabel4upi] = useState("UPI ID");
   const handlePurchase = () => {
-    if (valueOfUpi === "") {
-      return setEmptyField(true);
+    if (
+      valueOfUpi === "" ||
+      valueOfUpi.length < 8 ||
+      !valueOfUpi.includes("@")
+    ) {
+      return setEmptyField(true), setLabel4upi("Invalid UPI ID");
     }
     localStorage.setItem("PackSub", JSON.stringify(rateOfPack));
     document.body.classList.remove("overflowHidden");
+    setLabel4upi("UPI ID");
     setEmptyField(false);
     setIsPaymentOpen(false);
     setPaymentMethod(false);
@@ -149,6 +164,11 @@ function Music_premium_offers(props) {
 
   return (
     <div id="mainDiv">
+      <LoadingBar
+        color="#f11946"
+        progress={progress}
+        onLoaderFinished={() => setProgress(0)}
+      />
       <div id="overlay"></div>
       {paymentOverlay ? (
         <div className="payment_overlay">
@@ -284,6 +304,7 @@ function Music_premium_offers(props) {
               emptyField={emptyField}
               handlePurchase={handlePurchase}
               handleBackToAddMethod={handleBackToAddMethod}
+              label4upi={label4upi}
             />
           ) : null}
         </div>
@@ -292,7 +313,12 @@ function Music_premium_offers(props) {
       <nav className="nav4upgrade">
         <div className="nav1">
           <Menu className="menu" onClick={handleDrawer} />
-          <img src={logoImg} alt="logo" onClick={() => navigate("/")} />
+          <img
+            src={logoImg}
+            alt="logo"
+            onClick={() => navigate("/")}
+            style={{ cursor: "pointer" }}
+          />
         </div>
         <div className="nav2">
           <div className="cast" style={{ position: "relative" }}>

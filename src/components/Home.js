@@ -11,6 +11,8 @@ import sadImg from "../img/sadImg.avif";
 import excitedImg from "../img/excitedImg.avif";
 import {
   ExpandCircleDownOutlined,
+  LibraryAddCheck,
+  LibraryAddOutlined,
   MoreVert,
   NavigateBefore,
   NavigateNext,
@@ -18,7 +20,7 @@ import {
   ThumbUpAltOutlined,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import SimpleSnackbar from "./utils/SimpleSnackbar";
+import LoadingBar from "react-top-loading-bar";
 
 function Home(props) {
   const [musicData, setMusicData] = useState([]);
@@ -100,9 +102,13 @@ function Home(props) {
     }
   };
   const moodFilterBtn = (moodType) => {
-    setImgLink(getImgForMood(moodType));
-    getMusicData(moodType);
-    setActiveBtn(moodType);
+    setProgress(progress + 40);
+    setTimeout(() => {
+      setProgress(100);
+      setImgLink(getImgForMood(moodType));
+      getMusicData(moodType);
+      setActiveBtn(moodType);
+    }, [1000]);
   };
 
   //for x-axis scroll of innerMusicList
@@ -124,8 +130,53 @@ function Home(props) {
     props.getAlbumSong(album.songs); // puts all the songs of album in songArr.
   };
 
+  //for moreVert
+
+  const [isMoreVisible, setIsMoreVisible] = useState(false);
+  const [isAlbumpresent, setIsAlbumpresent] = useState(false);
+  const [intIndex, setIntIndex] = useState();
+  const handleMoreVert = (event, ind, data) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setIntIndex(ind);
+    setIsMoreVisible(!isMoreVisible);
+    const isAlbumAdded = props.libraryArr.some(
+      (album) => album._id === data._id
+    );
+    if (isAlbumAdded) {
+      setIsAlbumpresent(true);
+      return;
+    }
+    setIsAlbumpresent(false);
+  };
+
+  const [isMoreVisible1, setIsMoreVisible1] = useState(false);
+  const [isAlbumpresent1, setIsAlbumpresent1] = useState(false);
+  const [intIndex1, setIntIndex1] = useState();
+
+  const handleMoreVert1 = (event, ind, data) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setIntIndex1(ind);
+    setIsMoreVisible1(!isMoreVisible1);
+    const isAlbumAdded = props.libraryArr.some(
+      (album) => album._id === data._id
+    );
+    if (isAlbumAdded) {
+      setIsAlbumpresent1(true);
+      return;
+    }
+    setIsAlbumpresent1(false);
+  };
+  //for progress bar
+  const [progress, setProgress] = useState(0);
   return (
     <div className="home">
+      <LoadingBar
+        color="#f11946"
+        progress={progress}
+        onLoaderFinished={() => setProgress(0)}
+      />
       <BackgroundImage imgUrl={imgLink} />
       <Navbar
         scrollPosition={props.scrollPosition}
@@ -239,7 +290,6 @@ function Home(props) {
                           style={{ cursor: "pointer" }}
                           onClick={() => {
                             props.handleLikedSong(data);
-                            openSnackbar();
                           }}
                         />
                         {/* <MoreVert style={{ cursor: "pointer" }} /> */}
@@ -290,6 +340,24 @@ function Home(props) {
                               width: "34px",
                               height: "34px",
                               borderRadius: "50%",
+                              backgroundColor: "#2424243a",
+                              position: "absolute",
+                              top: "10px",
+                              right: "10px",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              zIndex: "99",
+                            }}
+                            onClick={(e) => handleMoreVert1(e, index, data)}
+                          >
+                            <MoreVert />
+                          </div>
+                          <div
+                            style={{
+                              width: "34px",
+                              height: "34px",
+                              borderRadius: "50%",
                               backgroundColor: "#242424aa",
                               position: "absolute",
                               bottom: "20px",
@@ -303,6 +371,28 @@ function Home(props) {
                           </div>
                         </div>
                         <img src={data.image} />
+                        {isMoreVisible1 && index === intIndex1 ? (
+                          <div
+                            className="addtolib"
+                            style={{ left: index === 0 ? "140px" : "-50px" }}
+                            onClick={(e) => {
+                              props.handleAddtolib(e, data);
+                              setIsMoreVisible1(false);
+                            }}
+                          >
+                            {!isAlbumpresent1 ? (
+                              <>
+                                <LibraryAddOutlined />
+                                <h4>Save album to library</h4>
+                              </>
+                            ) : (
+                              <>
+                                <LibraryAddCheck />
+                                <h4>Remove album from library</h4>
+                              </>
+                            )}
+                          </div>
+                        ) : null}
                       </div>
                     </Link>
                     <div className="albumText">
@@ -337,6 +427,24 @@ function Home(props) {
                               width: "34px",
                               height: "34px",
                               borderRadius: "50%",
+                              backgroundColor: "#2424243a",
+                              position: "absolute",
+                              top: "10px",
+                              right: "10px",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              zIndex: "99",
+                            }}
+                            onClick={(e) => handleMoreVert(e, index, data)}
+                          >
+                            <MoreVert />
+                          </div>
+                          <div
+                            style={{
+                              width: "34px",
+                              height: "34px",
+                              borderRadius: "50%",
                               backgroundColor: "#242424aa",
                               position: "absolute",
                               bottom: "20px",
@@ -350,6 +458,28 @@ function Home(props) {
                           </div>
                         </div>
                         <img src={data.image} />
+                        {isMoreVisible && index === intIndex ? (
+                          <div
+                            className="addtolib"
+                            style={{ left: index === 0 ? "140px" : "-50px" }}
+                            onClick={(e) => {
+                              props.handleAddtolib(e, data);
+                              setIsMoreVisible(false);
+                            }}
+                          >
+                            {!isAlbumpresent ? (
+                              <>
+                                <LibraryAddOutlined />
+                                <h4>Save album to library</h4>
+                              </>
+                            ) : (
+                              <>
+                                <LibraryAddCheck />
+                                <h4>Remove album from library</h4>
+                              </>
+                            )}
+                          </div>
+                        ) : null}
                       </div>
                     </Link>
                     <div className="albumText">
@@ -362,11 +492,6 @@ function Home(props) {
                 ))}
               </div>
             </div>
-            <SimpleSnackbar
-              whenLiked={isSnackbarOpen}
-              setIsSnackbarOpen={setIsSnackbarOpen}
-              message={"Saved to your likes"}
-            />
           </div>
         </div>
       </div>

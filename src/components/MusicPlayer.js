@@ -72,35 +72,8 @@ function MusicPlayer(props) {
     // Load the current song when the currentSongIndex changes
     console.log("currentSongIndex", currentSongIndex);
     console.log("playlist", playlist);
-    // setTimeout(() => {
     audioElem.current.src = playlist[currentSongIndex].audio_url;
-    // }, 2000);
   }, [currentSongIndex, playlist]);
-  // useEffect(() => {
-  //   const audio = audioElem.current;
-
-  //   // Check if the audio element is currently loading a source
-  //   if (audio.readyState > 0) {
-  //     // If it's not loading, you can safely call play()
-  //     audio.play().catch((error) => {
-  //       // Handle any play() errors, if necessary
-  //       console.error("Error while playing audio:", error);
-  //     });
-  //   } else {
-  //     // If it's still loading, add an event listener to play when it's ready
-  //     audio.oncanplaythrough = () => {
-  //       audio.play().catch((error) => {
-  //         // Handle any play() errors, if necessary
-  //         console.error("Error while playing audio:", error);
-  //       });
-  //       // Remove the event listener to prevent multiple play attempts
-  //       audio.oncanplaythrough = null;
-  //     };
-  //   }
-
-  //   // Load the new source
-  //   audio.src = playlist[currentSongIndex].audio_url;
-  // }, [currentSongIndex, playlist]);
 
   useEffect(() => {
     if (props.isSongPlaying) {
@@ -133,11 +106,11 @@ function MusicPlayer(props) {
       setVolume(0);
     }
   };
-  //for snackbar when a song is liked
-  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
-  const openSnackbar = () => {
-    setIsSnackbarOpen(true);
-  };
+  // //for snackbar when a song is liked
+  // const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+  // const openSnackbar = () => {
+  //   setIsSnackbarOpen(true);
+  // };
 
   return (
     <>
@@ -158,11 +131,11 @@ function MusicPlayer(props) {
           </button>
           {props.isSongPlaying && !songEnded ? (
             <button onClick={pauseSong}>
-              <Pause />
+              <Pause fontSize="large" />
             </button>
           ) : (
             <button onClick={playSong}>
-              <PlayArrow />
+              <PlayArrow fontSize="large" />
             </button>
           )}
           <button
@@ -190,7 +163,7 @@ function MusicPlayer(props) {
               style={{ cursor: "pointer" }}
               onClick={() => {
                 props.handleLikedSong(playlist[currentSongIndex]);
-                openSnackbar();
+                // openSnackbar();
               }}
             />
             {/* <MoreVert style={{ cursor: "pointer" }} /> */}
@@ -219,11 +192,11 @@ function MusicPlayer(props) {
           )}
         </div>
       </div>
-      <SimpleSnackbar2
+      {/* <SimpleSnackbar2
         whenLiked={isSnackbarOpen}
         setIsSnackbarOpen={setIsSnackbarOpen}
         message={"Saved to your likes"}
-      />
+      /> */}
     </>
   );
 }

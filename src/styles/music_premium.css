@@ -103,7 +103,7 @@
   margin: 0;
 }
 .feature h3 {
-  width: 310px;
+  max-width: 310px;
   color: #afafaf;
   font-weight: 300;
   font-size: 16px;
@@ -180,7 +180,7 @@
 .menu {
   cursor: pointer;
 }
-@media (max-width: 480px) {
+@media (max-width: 680px) {
   .features {
     flex-direction: column;
     align-items: center;

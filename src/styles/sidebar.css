@@ -27,7 +27,7 @@
 .link:hover {
   background-color: #87878773;
 }
-@media (max-width: 460px) {
+@media (max-width: 680px) {
   .sideBar_container {
     display: none;
   }

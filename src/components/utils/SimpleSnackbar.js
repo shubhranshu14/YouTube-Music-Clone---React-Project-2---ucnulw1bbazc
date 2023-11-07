@@ -14,13 +14,21 @@ export default function SimpleSnackbar(props) {
   };
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate("/likedSongs");
+    {
+      props.message === "Removed from library" ||
+      props.message === "Saved to library"
+        ? navigate("/library")
+        : navigate("/likedSongs");
+    }
   };
 
   const action = (
     <React.Fragment>
       <Button color="secondary" size="small" onClick={handleNavigate}>
-        Your likes
+        {props.message === "Removed from library" ||
+        props.message === "Saved to library"
+          ? "View"
+          : "Your likes"}
       </Button>
       <IconButton
         size="small"
@@ -37,7 +45,7 @@ export default function SimpleSnackbar(props) {
     <div>
       <Snackbar
         open={props.whenLiked}
-        autoHideDuration={3000}
+        autoHideDuration={2000}
         onClose={handleClose}
         message={props.message}
         action={action}

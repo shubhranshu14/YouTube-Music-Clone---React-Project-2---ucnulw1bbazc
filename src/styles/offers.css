@@ -72,6 +72,9 @@
   border-radius: 4px;
   cursor: pointer;
 }
+.payBtn:hover {
+  background-color: rgb(0, 108, 249);
+}
 
 .offers_container {
   min-height: 100vh;
@@ -117,6 +120,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
+}
+.rates_price:hover {
+  background-color: #414141;
 }
 
 .offers_terms {

@@ -114,10 +114,10 @@ function Signup(props) {
           <button className="authpage_btn" onClick={handleSignup}>
             Sign up
           </button>
-          <p style={{ fontSize: "16px", display: "flex" }}>
+          <p style={{ fontSize: "13px", display: "flex" }}>
             Have an account?
             <Link to="/">
-              <span>Log in</span>
+              <span className="hoverid">Log in</span>
             </Link>
             .
           </p>

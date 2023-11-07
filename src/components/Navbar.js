@@ -18,6 +18,7 @@ import {
 import "../styles/navbar.css";
 import SimpleSnackbar from "./utils/SimpleSnackbar";
 import { Link, useNavigate } from "react-router-dom";
+import LoadingBar from "react-top-loading-bar";
 
 function Navbar(props) {
   //for userProfile dropdown
@@ -26,6 +27,7 @@ function Navbar(props) {
   //for drawer
   const [drawerOpen, setDrawerOpen] = useState(false);
   const handleDrawer = () => {
+    if (isModal2Open) setIsModal2Open(false);
     setDrawerOpen(!drawerOpen);
     // document.body.classList.toggle("overflowHidden");
   };
@@ -78,9 +80,15 @@ function Navbar(props) {
     setIsSnackbarOpen(true);
   };
 
+  //for progress bar
+  const [progress, setProgress] = useState(0);
   //for log out
   const navigate = useNavigate();
   const handleLogout = () => {
+    setProgress(progress + 40);
+    setTimeout(() => {
+      setProgress(100);
+    }, [1000]);
     localStorage.clear();
     setTimeout(() => {
       navigate("/");
@@ -95,6 +103,11 @@ function Navbar(props) {
   };
   return (
     <div>
+      <LoadingBar
+        color="#f11946"
+        progress={progress}
+        onLoaderFinished={() => setProgress(0)}
+      />
       <nav
         style={{
           backgroundColor: props.scrollPosition > 20 ? "#030303" : "#03030300",
@@ -103,7 +116,12 @@ function Navbar(props) {
       >
         <div className="nav1">
           <Menu className="menu" onClick={handleDrawer} />
-          <img src={logoImg} alt="logo" onClick={() => navigate("/")} />
+          <img
+            src={logoImg}
+            alt="logo"
+            onClick={() => navigate("/")}
+            style={{ cursor: "pointer" }}
+          />
           <div
             className="flexDiv_4_search"
             style={{ justifyContent: drawerOpen ? "flex-end" : "" }}

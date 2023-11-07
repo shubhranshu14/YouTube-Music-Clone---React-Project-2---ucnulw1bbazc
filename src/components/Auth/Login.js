@@ -33,6 +33,7 @@ function Login() {
       );
 
       const restojson = await res.json();
+      console.log(restojson);
       if (restojson.status === "fail") {
         return setErrMsg(restojson.message);
       }
@@ -121,10 +122,10 @@ function Login() {
           <button className="authpage_btn" onClick={handleLogin}>
             Log in
           </button>
-          <p style={{ fontSize: "15px", display: "flex" }}>
+          <p style={{ fontSize: "13px", display: "flex" }}>
             Don't have an account?
             <Link to="/signup">
-              <span>Sign up</span>
+              <span className="hoverid">Sign up</span>
             </Link>
             .
           </p>

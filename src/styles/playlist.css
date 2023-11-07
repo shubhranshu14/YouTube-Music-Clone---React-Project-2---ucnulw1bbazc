@@ -86,7 +86,7 @@
   display: flex;
 }
 
-@media (max-width: 460px) {
+@media (max-width: 680px) {
   .album_mainBody_container {
     width: auto;
     padding: 0 10px;
@@ -103,6 +103,7 @@
   }
   .playListContainer {
     gap: 10px;
+    justify-content: space-evenly;
   }
   .playListThumbnail {
     width: 180px;
@@ -132,5 +133,13 @@
   }
   .playListType div::-webkit-scrollbar {
     width: 2px;
+  }
+}
+@media (max-width: 346px) {
+  .playListName h1 {
+    font-size: 12px;
+  }
+  .playListType div h4 {
+    font-size: 9px;
   }
 }
